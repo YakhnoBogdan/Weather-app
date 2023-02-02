@@ -1,0 +1,24 @@
+.cardLink {
+  padding: 20px;
+  height: 200px;
+  border-radius: 8px;
+  background-blend-mode: multiply;
+  transition: all 0.4s ease;
+  color: #fff;
+}
+.forecastLink {
+  background: center/cover url('/images/weather-background/forecast-bg.png') no-repeat;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.sportEventsLink {
+  background: center/100% url('/images/sport-events/sports-bg.jpg') no-repeat;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.sportEventsLink:hover {
+  background-size: 120%;
+}
+.forecastLink:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+}

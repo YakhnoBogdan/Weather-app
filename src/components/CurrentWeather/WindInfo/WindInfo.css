@@ -1,0 +1,16 @@
+.windInfo {
+  column-count: 3;
+  column-width: 200px;
+  text-align: center;
+}
+.windInfo > * {
+  color: #fff;
+}
+.windInfoCard {
+  width: 90%;
+  border-radius: 10px;
+  background: center/cover url('/images/weather-background/wind-bg.jpeg') no-repeat;
+  background-blend-mode: multiply;
+  transition: all 0.5s ease-in-out;
+  color: #000;
+}

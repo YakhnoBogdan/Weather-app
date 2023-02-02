@@ -1,0 +1,5 @@
+.dashboard {
+  height: calc(100vh - 80px);
+  overflow: scroll;
+  background: linear-gradient(180deg, rgba(236, 246, 246, 1) 0%, rgba(191, 237, 236, 1) 50%, rgba(81, 181, 174, 1) 100%);
+}

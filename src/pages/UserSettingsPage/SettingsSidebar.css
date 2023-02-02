@@ -1,0 +1,20 @@
+.settingsSidebar {
+  position: fixed;
+  width: 25%;
+  height: calc(100vh - 80px);
+  left: 0;
+  top: 80px;
+  background-color: #140d0c;
+}
+
+.MuiTypography-h3 {
+  padding: 15px 0;
+}
+
+.optionLink {
+  color: #fff;
+  transition: all 0.3s ease-in-out;
+}
+.optionLink:hover {
+  transform: scale(1.1);
+}
