@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 const commonHeaders = {
-  'X-RapidAPI-Key': 'ee1fc9c5c1msh0694808cea81769p1d7903jsn95a267eef144',
+  'X-RapidAPI-Key': '$',
   'X-RapidAPI-Host': 'weatherapi-com.p.rapidapi.com',
   'Content-Type': 'application/json',
 }
