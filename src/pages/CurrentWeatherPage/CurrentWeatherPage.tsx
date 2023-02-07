@@ -2,9 +2,9 @@ import { useEffect } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import dayjs from 'dayjs'
-import { selectIsLoadingWeather } from '../../redux/weather/selectors'
+import { selectGetWeatherError, selectIsLoadingWeather, selectWeather } from '../../redux/weather/selectors'
 import { fetchWeatherForecast } from '../../redux/weather/thunks'
-import { Box, Button, Stack } from '@mui/material'
+import { Box, Button, Stack, Typography } from '@mui/material'
 import { CitySearch } from '../../components/CitySearch/CitySearch'
 import { MyBackdrop } from '../../components/reusableComponents/MyBackdrop'
 import { CurrentWeather } from './CurrentWeather'
@@ -12,6 +12,9 @@ import { CurrentWeather } from './CurrentWeather'
 export const CurrentWeatherPage = () => {
   const dispatch = useDispatch()
   const isLoadingWeather = useSelector(selectIsLoadingWeather)
+  const weather = useSelector(selectWeather)
+  const getWeatherError = useSelector(selectGetWeatherError)
+
   const { qCity } = useParams()
 
   useEffect(() => {
@@ -38,7 +41,14 @@ export const CurrentWeatherPage = () => {
           </Link>
         </Stack>
       </Stack>
-      <CurrentWeather />
+      {weather !== undefined && weather !== null ? (
+        <CurrentWeather weather={weather} getWeatherError={getWeatherError} />
+      ) : (
+        <Box sx={{ position: 'relative', height: '30vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Box component={'img'} src='/images/icons/arrow-icon.svg' sx={{ positon: 'absolute', top: '20px', left: '5%' }} />
+          <Typography variant='h4'>Select location from search line</Typography>
+        </Box>
+      )}
     </Box>
   )
 }
