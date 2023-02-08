@@ -1,11 +1,27 @@
-import { useContext } from 'react'
-import { ProfileMenu } from '../ProfileMenu/ProfileMenu'
+import { HeaderNavMenu } from '../HeaderNavMenu/HeaderNavMenu'
 import { SwitchTheme } from '../SwitchTheme/SwitchTheme'
-import { Box } from '@mui/material'
 import { ThemeContext, ThemeContextTypes } from '../../context/themeContext'
+import { useContext, useCallback } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { Box } from '@mui/material'
+import { selectWeather } from '../../redux/weather/selectors'
+import { selectCurrentUser, selectCurrentUserId } from '../../redux/user/selectors'
+import { logoutUserAction } from '../../redux/user/actions'
 
 export const Header = () => {
   const { themeIsDark } = useContext(ThemeContext) as ThemeContextTypes
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  const currentUser = useSelector(selectCurrentUser)
+  const currentUserId = useSelector(selectCurrentUserId)
+  const weatherCity = useSelector(selectWeather)?.location.name
+
+  const handleLogout = useCallback(() => {
+    dispatch(logoutUserAction())
+    navigate('/login')
+  }, [dispatch, navigate])
 
   return (
     <Box
@@ -22,7 +38,7 @@ export const Header = () => {
     >
       <Box sx={{ width: '80%', margin: '0 auto', display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <SwitchTheme />
-        <ProfileMenu />
+        <HeaderNavMenu currentUser={currentUser} currentUserId={currentUserId} weatherCity={weatherCity} handleLogout={handleLogout} />
       </Box>
     </Box>
   )

@@ -1,31 +1,41 @@
 import { AdditionalParameters } from '../../components/CurrentWeather/AdditionalParameters/AdditionalParameters'
-import { CitySearch } from '../../components/CitySearch/CitySearch'
 import { WeatherCard } from '../../components/CurrentWeather/WeatherCard/WeatherCard'
 import { WindInfo } from '../../components/CurrentWeather/WindInfo/WindInfo'
-import { useSelector } from 'react-redux'
-import { Box, Button, Grid, Stack, Typography } from '@mui/material'
+import { useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { Box, Grid } from '@mui/material'
 import { selectGetWeatherError, selectWeather } from '../../redux/weather/selectors'
-import { ForecastModel } from '../../Types/WeatherModels'
+import { fetchWeatherForecast } from '../../redux/weather/thunks'
 
-interface CurrentWeatherProps {
-  weather: ForecastModel
-  getWeatherError: Error | null
-}
+export const CurrentWeather = () => {
+  const dispatch = useDispatch()
+  const weather = useSelector(selectWeather)
+  const getWeatherError = useSelector(selectGetWeatherError)
 
-export const CurrentWeather = ({ weather, getWeatherError }: CurrentWeatherProps) => {
+  const { qCity } = useParams()
+
+  useEffect(() => {
+    if (qCity !== undefined && weather === null) {
+      void dispatch(fetchWeatherForecast({ q: qCity, days: '3' }))
+    }
+  }, [dispatch, qCity])
+
   return (
     <Box sx={{ width: '90vw', maxWidth: '95vw', margin: '0 auto', paddingBottom: '50px' }}>
-      <Grid container spacing={2}>
-        <Grid item xs={12} sm={8}>
-          <WeatherCard weather={weather} error={getWeatherError} homepage={false} />
+      {weather !== null && weather !== undefined && (
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={8}>
+            <WeatherCard weather={weather} error={getWeatherError} homepage={false} />
+          </Grid>
+          <Grid item xs={6} sm={4}>
+            <WindInfo weather={weather} />
+          </Grid>
+          <Grid item sm={12}>
+            <AdditionalParameters weather={weather} error={getWeatherError} />
+          </Grid>
         </Grid>
-        <Grid item xs={6} sm={4}>
-          <WindInfo weather={weather} />
-        </Grid>
-        <Grid item sm={12}>
-          <AdditionalParameters weather={weather} error={getWeatherError} />
-        </Grid>
-      </Grid>
+      )}
     </Box>
   )
 }

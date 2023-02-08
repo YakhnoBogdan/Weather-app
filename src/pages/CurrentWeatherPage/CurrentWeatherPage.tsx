@@ -1,27 +1,17 @@
-import { useEffect } from 'react'
-import { Link, useParams } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
-import dayjs from 'dayjs'
-import { selectGetWeatherError, selectIsLoadingWeather, selectWeather } from '../../redux/weather/selectors'
-import { fetchWeatherForecast } from '../../redux/weather/thunks'
-import { Box, Button, Stack, Typography } from '@mui/material'
 import { CitySearch } from '../../components/CitySearch/CitySearch'
 import { MyBackdrop } from '../../components/reusableComponents/MyBackdrop'
-import { CurrentWeather } from './CurrentWeather'
+import { Link, Outlet, useParams } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Box, Button, Stack, Typography } from '@mui/material'
+import dayjs from 'dayjs'
+import { selectGetWeatherError, selectIsLoadingWeather, selectWeather } from '../../redux/weather/selectors'
 
 export const CurrentWeatherPage = () => {
-  const dispatch = useDispatch()
   const isLoadingWeather = useSelector(selectIsLoadingWeather)
   const weather = useSelector(selectWeather)
   const getWeatherError = useSelector(selectGetWeatherError)
 
   const { qCity } = useParams()
-
-  useEffect(() => {
-    if (qCity !== undefined) {
-      void dispatch(fetchWeatherForecast({ q: qCity, days: '3' }))
-    }
-  }, [dispatch, qCity])
 
   return (
     <Box sx={{ width: '90vw', maxWidth: '95vw', margin: '0 auto', paddingBottom: '50px' }}>
@@ -41,12 +31,22 @@ export const CurrentWeatherPage = () => {
           </Link>
         </Stack>
       </Stack>
-      {weather !== undefined && weather !== null ? (
-        <CurrentWeather weather={weather} getWeatherError={getWeatherError} />
-      ) : (
+      <Box>
+        <Outlet />
+      </Box>
+      {weather === null && getWeatherError === null && !isLoadingWeather.request && (
         <Box sx={{ position: 'relative', height: '30vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-          <Box component={'img'} src='/images/icons/arrow-icon.svg' sx={{ positon: 'absolute', top: '20px', left: '5%' }} />
+          <Box
+            component={'img'}
+            src='/images/icons/arrow-icon.svg'
+            sx={{ height: '150px', width: '150px', position: 'absolute', top: '-40px', left: '5%', transform: 'rotate(-80deg)' }}
+          />
           <Typography variant='h4'>Select location from search line</Typography>
+        </Box>
+      )}
+      {getWeatherError !== null && (
+        <Box sx={{ height: '30vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+          <Typography variant='h4'>Get request fail</Typography>
         </Box>
       )}
     </Box>
