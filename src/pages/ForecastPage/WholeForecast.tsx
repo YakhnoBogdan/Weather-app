@@ -23,7 +23,7 @@ export const WholeForecast = () => {
   const [currentDay, setCurrentDay] = useState(day !== undefined ? +day : 0)
 
   useEffect(() => {
-    if (qCity !== undefined && forecast === undefined) {
+    if (qCity !== undefined && forecast === null) {
       void dispatch(fetchWeatherForecast({ q: qCity, days: '3' }))
     }
   }, [dispatch, forecast, qCity])

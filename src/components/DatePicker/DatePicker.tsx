@@ -12,6 +12,7 @@ import { fetchWeatherHistory } from '../../redux/weather/thunks'
 import { DateValidationError } from '@mui/x-date-pickers/internals/hooks/validation/useDateValidation'
 import { dateFormatString } from '../../pages/HistoryPage/HistoryPageParticularDay'
 import { checkDatePickingError } from '../../redux/weather/actions'
+import { usePrevious } from '../../hooks/usePrevious'
 
 export default function HistoryDatePicker() {
   const dispatch = useDispatch()

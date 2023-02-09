@@ -39,11 +39,13 @@ export const AdditionalParameters = ({ weather, error }: AdditionalParametersPro
       {isLoadingWeather.request ? (
         <Skeleton variant='rectangular' height={320} sx={{ borderRadius: '5px' }} animation='wave' />
       ) : (
-        <TableContainer component={Paper} sx={{ ...tableThemeStyles.backgroundColor }}>
+        <TableContainer component={Paper} sx={{ ...tableThemeStyles.backgroundColor, boxShadow: '0 0 10px 0 #000' }}>
           <Table sx={{ minWidth: 650 }} aria-label='simple table'>
             <TableHead>
               <TableRow>
-                <TableCell sx={{ fontWeight: 'bold', fontSize: '1.4rem', ...tableThemeStyles.color }}>Additional Parameters</TableCell>
+                <TableCell sx={{ textAlign: 'center', fontWeight: 'bold', fontSize: '1.4rem', ...tableThemeStyles.color }}>
+                  Additional Parameters
+                </TableCell>
                 <TableCell sx={{ textAlign: 'center', fontWeight: 'bold', fontSize: '1.4rem', ...tableThemeStyles.color }}>
                   {metricSystem ? 'Metric' : 'Imperial'} system
                 </TableCell>
@@ -53,7 +55,7 @@ export const AdditionalParameters = ({ weather, error }: AdditionalParametersPro
               {Object.keys(tableRowParameters).map((property) => {
                 return (
                   <TableRow key={property}>
-                    <TableCell sx={{ ...tableThemeStyles.color }}>{property}</TableCell>
+                    <TableCell sx={{ textAlign: 'center', ...tableThemeStyles.color }}>{property}</TableCell>
                     <TableCell sx={{ textAlign: 'center', ...tableThemeStyles.color }}>
                       {tableRowParameters[property as keyof typeof tableRowParameters]}
                     </TableCell>

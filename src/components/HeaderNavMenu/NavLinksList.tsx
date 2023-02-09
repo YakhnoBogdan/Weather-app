@@ -1,8 +1,8 @@
 import React, { useMemo } from 'react'
-import dayjs from 'dayjs'
 import { Divider, Typography, styled } from '@mui/material'
 import { NavLink } from 'react-router-dom'
 import { ThemeContext, ThemeContextTypes } from '../../context/themeContext'
+import dayjs from 'dayjs'
 
 interface NavLinksProps {
   weatherCity: string | undefined
@@ -33,10 +33,9 @@ const StyledLink = styled(Typography)(() => ({
 export const NavLinksList = ({ weatherCity }: NavLinksProps) => {
   const { themeIsDark } = React.useContext(ThemeContext) as ThemeContextTypes
 
-  const today = useMemo(() => dayjs().format('YYYY-MM-DD'), [])
-
   const linkPaths = useMemo(() => {
-    const paths = ['Homepage', 'Realtime Weather', 'Forecast', 'Weather history', 'Sport events']
+    const paths = ['Homepage', 'Realtime Weather', 'Forecast', 'Weather History', 'Sport events']
+    const today = dayjs().format('YYYY-MM-DD')
     return paths.map((path) => {
       switch (path) {
         case 'Homepage':
@@ -48,7 +47,7 @@ export const NavLinksList = ({ weatherCity }: NavLinksProps) => {
         case 'Forecast':
           return [path, `/forecast/${weatherCity !== undefined ? `${weatherCity}/0` : ''}`]
           break
-        case 'Weather history':
+        case 'Weather History':
           return [path, `/weather-history/${weatherCity !== undefined ? `${weatherCity}/${today}` : ''}`]
           break
         case 'Sport events':
@@ -58,7 +57,7 @@ export const NavLinksList = ({ weatherCity }: NavLinksProps) => {
           return [path, '/']
       }
     })
-  }, [today, weatherCity])
+  }, [weatherCity])
 
   return (
     <React.Fragment>

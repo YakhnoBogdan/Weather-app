@@ -25,7 +25,7 @@ export const WeatherCard = ({ weather, error, homepage }: WeatherCardProps) => {
       {isLoadingWeather.request ? (
         <Skeleton variant='rectangular' height={320} sx={{ borderRadius: '5px' }} animation='wave' />
       ) : (
-        <Card sx={{ ...themeStyles(themeIsDark)?.regularCard }}>
+        <Card sx={{ ...themeStyles(themeIsDark)?.regularCard, boxShadow: '0 0 10px 0 #000' }}>
           <CardHeader
             title={`${weather?.location.name}, ${weather?.location.region}, ${weather?.location.country}`}
             subheader={<Typography sx={{ ...themeStyles(themeIsDark)?.textColor }}>{weather?.location.localtime}</Typography>}
@@ -42,10 +42,10 @@ export const WeatherCard = ({ weather, error, homepage }: WeatherCardProps) => {
               justifyContent: 'space-between',
               backgroundBlendMode: 'multiply',
               background: "center/cover url('/images/weather-background/cloudy.jpg') no-repeat",
-              backgroundColor: themeIsDark ? 'rgba(0, 0, 0, 0.5)' : '',
+              backgroundColor: themeIsDark ? 'rgba(0, 0, 0, 0.3)' : 'rgba(0, 0, 0, 0.5)',
             }}
           >
-            <Box>
+            <Box sx={{ '& > *': { color: '#fff' } }}>
               <Typography variant='h2'>{countingSystem ? `${weather?.current.temp_c}°c` : `${weather?.current.temp_f}°f`}</Typography>
               <Typography variant='subtitle1'>{weather?.current.condition.text}</Typography>
               <Typography variant='subtitle2'>

@@ -5,8 +5,6 @@ export interface StackMuiPropertyValueProps {
     property: string
     value: string | number
   }
-  // icon?: SvgIconComponent
-  // icon?: string
 }
 export const StackMuiPropertyValue = ({ textValues }: StackMuiPropertyValueProps) => {
   return (

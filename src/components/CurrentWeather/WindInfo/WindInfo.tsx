@@ -25,15 +25,24 @@ export const WindInfo = ({ weather }: WindInfoProps) => {
       ) : (
         <Card
           className='windInfoCard'
-          sx={{ backgroundColor: themeIsDark ? 'rgba(0, 0, 0, 0.5)' : '', ...themeStyles(themeIsDark)?.textColor, color: '#000', width: '100%' }}
+          sx={{
+            backgroundColor: themeIsDark ? 'rgba(0, 0, 0, 0.3)' : 'rgba(0, 0, 0, 0.3)',
+            ...themeStyles(themeIsDark)?.textColor,
+            color: '#000',
+            width: '100%',
+            boxShadow: '0 0 10px 0 #000',
+          }}
         >
           <CardHeader title='Wind info' sx={{ color: '#fff' }} />
           <CardContent className='windInfo'>
             <StackMuiPropertyValue
-              textValues={{ property: 'Wind speed', value: countingSystem ? `${weather.current.wind_kph}kph` : `${weather.current.wind_mph} mph` }}
+              textValues={{ property: 'Wind speed', value: countingSystem ? `${weather.current.wind_kph} kph` : `${weather.current.wind_mph} mph` }}
             />
             <StackMuiPropertyValue textValues={{ property: 'Wind direction', value: weather.current.wind_dir }} />
             <StackMuiPropertyValue textValues={{ property: 'Wind degree', value: weather.current.wind_degree }} />
+            <StackMuiPropertyValue
+              textValues={{ property: 'Wind gust', value: countingSystem ? `${weather.current.gust_kph} kph` : `${weather.current.gust_mph} mph` }}
+            />
           </CardContent>
         </Card>
       )}

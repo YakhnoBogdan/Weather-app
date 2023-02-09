@@ -3,8 +3,6 @@ import {
   AccordionSummary,
   AccordionDetails,
   Avatar,
-  Box,
-  Button,
   Card,
   CardActions,
   CardContent,
@@ -68,7 +66,15 @@ export const HourForecastCard = ({ hourForecast }: { hourForecast: HourForecastM
       </CardContent>
       <CardActions sx={{ height: '20px' }}>
         <Accordion sx={{ position: 'absolute', bottom: '0', left: '0', right: '0', ...themeStyles(themeIsDark)?.infoCardAccordion }}>
-          <AccordionSummary expandIcon={<ExpandMore />} aria-controls='panel1a-content' id='panel1a-header'>
+          <AccordionSummary
+            expandIcon={<ExpandMore />}
+            aria-controls='panel1a-content'
+            id='panel1a-header'
+            sx={{
+              backgroundColor: themeIsDark ? '#eee' : '#ccc',
+              '&:hover': { backgroundColor: '#5d5d5d', color: '#fff' },
+            }}
+          >
             <Typography align='center'>More...</Typography>
           </AccordionSummary>
           <AccordionDetails>

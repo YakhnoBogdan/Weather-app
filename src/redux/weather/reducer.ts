@@ -8,7 +8,6 @@ type WeatherActionsType = ActionType<typeof WeatherActions>
 
 export interface WeatherState {
   weather: ForecastModel | null
-  forecast: ForecastModel[]
   weatherHistory: WeatherHistoryModel | null
   foundCities: FoundCity[]
   getWeatherError: Error | null
@@ -22,7 +21,6 @@ const initialState: WeatherState = {
   getWeatherError: null,
   findCityError: null,
   datePickingError: false,
-  forecast: [],
   foundCities: [],
   isLoadingWeather: {
     success: false,

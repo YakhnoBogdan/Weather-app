@@ -55,7 +55,8 @@ export const CitySearch = ({ page, searchWeatherHistory }: CitySearchProps) => {
     const selectedCity = foundCities.find((city) => city.name === optionHighlighted)
     const isCityAlreadyAdded = favoriteCities?.find((addedCity) => addedCity.id === selectedCity?.id) !== undefined
     return {
-      disabledButton: selectedCity === undefined || isCityAlreadyAdded,
+      disabledAddCity: isCityAlreadyAdded,
+      disabledOnWeather: selectedCity === undefined,
       searchTooltip: isCityAlreadyAdded ? 'City already added' : 'Select city from options',
     }
   }, [favoriteCities, foundCities, optionHighlighted])
@@ -99,8 +100,8 @@ export const CitySearch = ({ page, searchWeatherHistory }: CitySearchProps) => {
       <Autocomplete
         disablePortal
         id='combo-box-demo'
-        options={foundCityNames}
-        sx={{ width: 500, backgroundColor: '#fff' }}
+        options={foundCityNames.length > 0 ? foundCityNames : ['Nothing found']}
+        sx={{ backgroundColor: '#fff', minWidth: page !== 'forecast' && page !== 'weatherPage' ? '350px' : '' }}
         filterOptions={filterOptions}
         onHighlightChange={onHighlightChange}
         freeSolo={true}
@@ -110,13 +111,13 @@ export const CitySearch = ({ page, searchWeatherHistory }: CitySearchProps) => {
           <TextField {...params} label='Search city' onChange={handleSearchInput} fullWidth sx={{ boxShadow: '0 0 5px 0 #ccc' }} />
         )}
       />
-      <Tooltip title={disabledSumbit.disabledButton ? disabledSumbit.searchTooltip : ''} placement='top'>
+      <Tooltip title={disabledSumbit.disabledAddCity ? disabledSumbit.searchTooltip : ''} placement='top'>
         <Box sx={{ alignSelf: 'stretch' }}>
           <Button
             type='button'
             variant='contained'
             onClick={handleSearchComplete}
-            disabled={disabledSumbit.disabledButton}
+            disabled={page === 'favoriteCities' ? disabledSumbit.disabledAddCity : disabledSumbit.disabledOnWeather}
             sx={{ height: '100%', '&:disabled': { backgroundColor: themeIsDark ? '#b4cbcb' : '#cfcece' } }}
           >
             {page === 'favoriteCities' ? 'Add' : 'Search'}

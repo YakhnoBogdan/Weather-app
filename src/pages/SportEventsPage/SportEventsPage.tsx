@@ -58,7 +58,12 @@ export const SportEventsPage = () => {
                       {tab}
                     </Badge>
                   }
-                  sx={{ flexBasis: '200px', color: themeIsDark ? '#fff' : '#000', '&:disabled': { color: '#ccc' } }}
+                  sx={{
+                    flexBasis: '200px',
+                    color: themeIsDark ? '#fff' : '#000',
+                    '&:disabled': { color: '#ccc' },
+                    '& > span': { padding: '8px' },
+                  }}
                   disabled={sportEvents[tab as keyof typeof sportEvents].length === 0}
                 />
               )

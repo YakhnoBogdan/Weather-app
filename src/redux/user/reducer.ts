@@ -29,6 +29,7 @@ const initialState: UserState = {
 }
 
 export const userReducer = (state = initialState, action: UserActionsType): UserState => {
+  console.log(state)
   switch (action.type) {
     case getType(UserActions.userLogin):
       return {

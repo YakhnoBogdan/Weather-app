@@ -46,8 +46,6 @@ export const HistoryPageParticularDay = () => {
     return qCity !== undefined && qCity !== 'undefined' && !datePickingError ? res.map((date) => date.format(dateFormatString)) : []
   }, [dateParam, datePickingError, endDateParam, qCity])
 
-  // Check valid search params to dispatch
-
   useEffect(() => {
     if (qCity !== undefined && dateParam !== undefined && qCity !== 'undefined') {
       const validDate = dayjs(dateParam).format(dateFormatString)

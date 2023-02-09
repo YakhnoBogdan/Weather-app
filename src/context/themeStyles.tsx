@@ -12,7 +12,7 @@ export const themeStyles = (themeIsDark: boolean) => {
         background: 'linear-gradient(269deg, rgb(47 85 74) 0%, rgb(39 56 51) 50%, rgb(28 44 42) 100%)',
       },
       regularCard: {
-        backgroundColor: '#3e3737',
+        backgroundColor: '#221f1f',
         color: '#fff',
         boxShadow: '0px 0px 23px -13px rgba(204,204,204,1)',
       },

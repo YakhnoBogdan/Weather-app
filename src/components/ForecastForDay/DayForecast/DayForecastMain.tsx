@@ -26,7 +26,7 @@ export const DayForecastMain = ({ forecast, currentWeather, location }: DayForec
             sx={{ ...themeStyles(themeIsDark)?.textColor }}
             subheader={<Typography sx={{ ...themeStyles(themeIsDark)?.textColor }}>{location.country}</Typography>}
           />
-          <Typography fontSize={'14px'} sx={{ paddingLeft: '16px' }}>
+          <Typography fontSize={'20px'} sx={{ paddingLeft: '16px', fontWeight: 'bold' }}>
             Date {forecast.date}
           </Typography>
         </Box>
