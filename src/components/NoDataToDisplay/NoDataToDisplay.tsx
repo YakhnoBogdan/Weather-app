@@ -10,7 +10,7 @@ interface NoDataToDisplayProps {
 export const NoDataToDisplay = ({ weather, getWeatherError, isLoadingWeather }: NoDataToDisplayProps) => {
   return (
     <Box>
-      {weather === null && !isLoadingWeather.request && (
+      {!weather && !isLoadingWeather.request && (
         <Box sx={{ position: 'relative', height: '30vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Box
             component={'img'}
@@ -22,7 +22,7 @@ export const NoDataToDisplay = ({ weather, getWeatherError, isLoadingWeather }: 
           </Typography>
         </Box>
       )}
-      {getWeatherError !== null && (
+      {getWeatherError && (
         <Box sx={{ height: '30vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
           <Typography variant='h4' align='center'>
             Get request fail
